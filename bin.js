@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const rimraf = require('./')
+const rimfar = require('./')
 
 const path = require('path')
 
@@ -41,7 +41,7 @@ const go = n => {
   if (n >= args.length)
     return
   const options = noglob ? { glob: false } : {}
-  rimraf(args[n], options, er => {
+  rimfar(args[n], options, er => {
     if (er)
       throw er
     go(n+1)
@@ -51,7 +51,7 @@ const go = n => {
 if (help || args.length === 0) {
   // If they didn't ask for help, then this is not a "success"
   const log = help ? console.log : console.error
-  log('Usage: rimraf <path> [<path> ...]')
+  log('Usage: rimfar <path> [<path> ...]')
   log('')
   log('  Deletes all files and folders at "path" recursively.')
   log('')

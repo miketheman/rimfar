@@ -1,11 +1,11 @@
-var rimraf = require('../')
+var rimfar = require('../')
 var t = require('tap')
 
 var fs = require('fs')
 var fill = require('./fill.js')
 
 t.test('initial clean', function (t) {
-  rimraf.sync(__dirname + '/target')
+  rimfar.sync(__dirname + '/target')
   t.throws(function () {
     fs.statSync(__dirname + '/target')
   })
@@ -16,7 +16,7 @@ t.test('sync removal', function (t) {
   fill()
   t.ok(fs.statSync(__dirname + '/target').isDirectory())
 
-  rimraf.sync(__dirname + '/target')
+  rimfar.sync(__dirname + '/target')
   t.throws(function () {
     fs.statSync(__dirname + '/target')
   })
@@ -27,7 +27,7 @@ t.test('async removal', function (t) {
   fill()
   t.ok(fs.statSync(__dirname + '/target').isDirectory())
 
-  rimraf(__dirname + '/target', function (er) {
+  rimfar(__dirname + '/target', function (er) {
     if (er)
       throw er
     t.throws(function () {
@@ -45,12 +45,12 @@ t.test('glob', function (t) {
     var pattern = __dirname + '/target/f-*'
     var before = glob.sync(pattern)
     t.notEqual(before.length, 0)
-    rimraf(pattern, function (er) {
+    rimfar(pattern, function (er) {
       if (er)
         throw er
       var after = glob.sync(pattern)
       t.same(after, [])
-      rimraf.sync(__dirname + '/target')
+      rimfar.sync(__dirname + '/target')
       t.end()
     })
   })
@@ -60,10 +60,10 @@ t.test('glob', function (t) {
     var pattern = __dirname + '/target/f-*'
     var before = glob.sync(pattern)
     t.notEqual(before.length, 0)
-    rimraf.sync(pattern)
+    rimfar.sync(pattern)
     var after = glob.sync(pattern)
     t.same(after, [])
-    rimraf.sync(__dirname + '/target')
+    rimfar.sync(__dirname + '/target')
     t.end()
   })
 })
@@ -76,12 +76,12 @@ t.test('no glob', function (t) {
     var pattern = __dirname + '/target/f-*'
     var before = glob.sync(pattern)
     t.notEqual(before.length, 0)
-    rimraf(pattern, { disableGlob: true }, function (er) {
+    rimfar(pattern, { disableGlob: true }, function (er) {
       if (er)
         throw er
       var after = glob.sync(pattern)
       t.same(after, before)
-      rimraf.sync(__dirname + '/target')
+      rimfar.sync(__dirname + '/target')
       t.end()
     })
   })
@@ -91,10 +91,10 @@ t.test('no glob', function (t) {
     var pattern = __dirname + '/target/f-*'
     var before = glob.sync(pattern)
     t.notEqual(before.length, 0)
-    rimraf.sync(pattern, { disableGlob: true })
+    rimfar.sync(pattern, { disableGlob: true })
     var after = glob.sync(pattern)
     t.same(after, before)
-    rimraf.sync(__dirname + '/target')
+    rimfar.sync(__dirname + '/target')
     t.end()
   })
 })

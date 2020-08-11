@@ -1,4 +1,4 @@
-var rimraf = require('../')
+var rimfar = require('../')
 var fs = require('fs')
 var path = require('path')
 var t = require('tap')
@@ -161,8 +161,8 @@ t.test('setup', function (t) {
   t.end()
 })
 
-t.test('rimraf with interceptor', function (t) {
-  rimraf('a', myFs, function (er) {
+t.test('rimfar with interceptor', function (t) {
+  rimfar('a', myFs, function (er) {
     if (er) {
       throw er
     }
@@ -172,16 +172,16 @@ t.test('rimraf with interceptor', function (t) {
   })
 })
 
-t.test('rimraf sync with interceptor', function (t) {
+t.test('rimfar sync with interceptor', function (t) {
   create()
-  rimraf.sync('a', myFs)
+  rimfar.sync('a', myFs)
   t.strictSame(intercepted, expectSync)
   create()
   t.end()
 })
 
 t.test('cleanup', function (t) {
-  rimraf.sync('a')
+  rimfar.sync('a')
   t.throws(fs.statSync.bind(fs, 'a'))
   t.end()
 })

@@ -1,11 +1,11 @@
 {
-  "name": "rimraf",
-  "version": "3.0.2",
-  "main": "rimraf.js",
-  "description": "A deep deletion module for node (like `rm -rf`)",
+  "name": "rimfar",
+  "version": "3.0.2-omega",
+  "main": "rimfar.js",
+  "description": "A deep deletion module for node (like `rm -fr`)",
   "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
   "license": "ISC",
-  "repository": "git://github.com/isaacs/rimraf.git",
+  "repository": "https://github.com/miketheman/rimfar.git",
   "scripts": {
     "preversion": "npm test",
     "postversion": "npm publish",
@@ -20,7 +20,7 @@
     "LICENSE",
     "README.md",
     "bin.js",
-    "rimraf.js"
+    "rimfar.js"
   ],
   "devDependencies": {
     "mkdirp": "^0.5.1",

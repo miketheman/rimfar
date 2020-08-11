@@ -1,3 +1,7 @@
+# v3.0.2-omega
+
+- Rename `rimraf` to `rimfar` to match my personal preference.
+
 # v3.0
 
 - Add `--preserve-root` option to executable (default true)

@@ -4,10 +4,10 @@ var mkdirp = require('mkdirp')
 var fs = require('fs')
 var spawn = require('child_process').spawn
 var node = process.execPath
-var rimraf = require('../')
+var rimfar = require('../')
 
 t.test('setup', function (t) {
-  rimraf.sync(__dirname + '/bintest')
+  rimfar.sync(__dirname + '/bintest')
   mkdirp.sync(__dirname + '/bintest')
   process.chdir(__dirname + '/bintest')
   mkdirp.sync('a/b/c')
@@ -53,7 +53,7 @@ t.test('help', function (t) {
     child.on('close', function (code, signal) {
       t.equal(code, 0)
       t.equal(signal, null)
-      t.match(out, /^Usage: rimraf <path> \[<path> \.\.\.\]/)
+      t.match(out, /^Usage: rimfar <path> \[<path> \.\.\.\]/)
       t.end()
     })
   }
@@ -105,6 +105,6 @@ t.test('glob, but no exact match', function (t) {
 
 
 t.test('cleanup', function (t) {
-  rimraf.sync(__dirname + '/bintest')
+  rimfar.sync(__dirname + '/bintest')
   t.end()
 })

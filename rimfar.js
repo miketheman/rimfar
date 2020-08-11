@@ -45,17 +45,17 @@ const defaults = options => {
   options.glob = options.glob || defaultGlobOpts
 }
 
-const rimraf = (p, options, cb) => {
+const rimfar = (p, options, cb) => {
   if (typeof options === 'function') {
     cb = options
     options = {}
   }
 
-  assert(p, 'rimraf: missing path')
-  assert.equal(typeof p, 'string', 'rimraf: path should be a string')
-  assert.equal(typeof cb, 'function', 'rimraf: callback function required')
-  assert(options, 'rimraf: invalid options argument provided')
-  assert.equal(typeof options, 'object', 'rimraf: options should be object')
+  assert(p, 'rimfar: missing path')
+  assert.equal(typeof p, 'string', 'rimfar: path should be a string')
+  assert.equal(typeof cb, 'function', 'rimfar: callback function required')
+  assert(options, 'rimfar: invalid options argument provided')
+  assert.equal(typeof options, 'object', 'rimfar: options should be object')
 
   defaults(options)
 
@@ -84,12 +84,12 @@ const rimraf = (p, options, cb) => {
               busyTries < options.maxBusyTries) {
             busyTries ++
             // try again, with the same exact callback as this one.
-            return setTimeout(() => rimraf_(p, options, CB), busyTries * 100)
+            return setTimeout(() => rimfar_(p, options, CB), busyTries * 100)
           }
 
           // this one won't happen if graceful-fs is used.
           if (er.code === "EMFILE" && timeout < options.emfileWait) {
-            return setTimeout(() => rimraf_(p, options, CB), timeout ++)
+            return setTimeout(() => rimfar_(p, options, CB), timeout ++)
           }
 
           // already gone
@@ -99,7 +99,7 @@ const rimraf = (p, options, cb) => {
         timeout = 0
         next(er)
       }
-      rimraf_(p, options, CB)
+      rimfar_(p, options, CB)
     })
   }
 
@@ -126,7 +126,7 @@ const rimraf = (p, options, cb) => {
 //
 // If anyone ever complains about this, then I guess the strategy could
 // be made configurable somehow.  But until then, YAGNI.
-const rimraf_ = (p, options, cb) => {
+const rimfar_ = (p, options, cb) => {
   assert(p)
   assert(options)
   assert(typeof cb === 'function')
@@ -240,7 +240,7 @@ const rmkids = (p, options, cb) => {
       return options.rmdir(p, cb)
     let errState
     files.forEach(f => {
-      rimraf(path.join(p, f), options, er => {
+      rimfar(path.join(p, f), options, er => {
         if (errState)
           return
         if (er)
@@ -255,14 +255,14 @@ const rmkids = (p, options, cb) => {
 // this looks simpler, and is strictly *faster*, but will
 // tie up the JavaScript thread and fail on excessively
 // deep directory trees.
-const rimrafSync = (p, options) => {
+const rimfarSync = (p, options) => {
   options = options || {}
   defaults(options)
 
-  assert(p, 'rimraf: missing path')
-  assert.equal(typeof p, 'string', 'rimraf: path should be a string')
-  assert(options, 'rimraf: missing options')
-  assert.equal(typeof options, 'object', 'rimraf: options should be object')
+  assert(p, 'rimfar: missing path')
+  assert.equal(typeof p, 'string', 'rimfar: path should be a string')
+  assert(options, 'rimfar: missing options')
+  assert.equal(typeof options, 'object', 'rimfar: options should be object')
 
   let results
 
@@ -333,7 +333,7 @@ const rmdirSync = (p, options, originalEr) => {
 const rmkidsSync = (p, options) => {
   assert(p)
   assert(options)
-  options.readdirSync(p).forEach(f => rimrafSync(path.join(p, f), options))
+  options.readdirSync(p).forEach(f => rimfarSync(path.join(p, f), options))
 
   // We only end up here once we got ENOTEMPTY at least once, and
   // at this point, we are guaranteed to have removed all the kids.
@@ -356,5 +356,5 @@ const rmkidsSync = (p, options) => {
   } while (true)
 }
 
-module.exports = rimraf
-rimraf.sync = rimrafSync
+module.exports = rimfar
+rimfar.sync = rimfarSync
